@@ -4,7 +4,7 @@
   "description": "Keep your code piping hot! Live code reloading without additional binaries",
   "main": "lib/piping.js",
   "dependencies": {
-    "chokidar": "^1.1.0",
+    "chokidar": "^1.5.1",
     "colors": "1.0.x"
   },
   "devDependencies": {

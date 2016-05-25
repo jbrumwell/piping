@@ -77,6 +77,18 @@ module.exports = (ops) ->
       unless respawnPending
         cluster.fork()
 
+    watcher.on "add", (file) ->
+      console.log "[piping]".bold.red,"File",path.relative(process.cwd(),file),"has been added, reloading."
+
+      # if a worker is already running, kill it and let the exit handler respawn it
+      for id, worker of cluster.workers
+        respawnPending = true
+        process.kill(worker.process.pid, 'SIGTERM') # worker.kill() doesn't send SIGTERM
+
+      # if a worker died somehow, respawn it right away
+      unless respawnPending
+        cluster.fork()
+
     return false
   else
     return true
