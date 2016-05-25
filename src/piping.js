@@ -14,6 +14,7 @@ const defaults = {
 
 function getInitial(options) {
   const dir = path.dirname(options.main);
+  let initial = dir;
 
   if (options.hook) {
     initial = fixChokidar(options.main);
@@ -21,14 +22,14 @@ function getInitial(options) {
     intitial = options.paths.map((file) => {
       return _.isString(file) ? path.join(dir, file) : file;
     });
-  } else {
-    initial = dir;
   }
 
   return initial;
 }
 
 function getOptions(ops) {
+  let options;
+  
   if (typeof ops === 'string' || ops instanceof String) {
     options = _.defaults({
       main : path.resolve(ops),
