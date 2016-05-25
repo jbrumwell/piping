@@ -19,7 +19,7 @@ function getInitial(options) {
   if (options.hook) {
     initial = fixChokidar(options.main);
   } else if (Array.isArray(options.paths)){
-    intitial = options.paths.map((file) => {
+    initial = options.paths.map((file) => {
       return _.isString(file) ? path.join(dir, file) : file;
     });
   }
@@ -29,7 +29,7 @@ function getInitial(options) {
 
 function getOptions(ops) {
   let options;
-  
+
   if (typeof ops === 'string' || ops instanceof String) {
     options = _.defaults({
       main : path.resolve(ops),
